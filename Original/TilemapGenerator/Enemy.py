@@ -42,7 +42,7 @@ class Enemy:
             raise ValueError("min_level argument must be smaller than or equal to max_level argument.")
         
         # Ensure min_level and max_level are in range
-        if min_level < 0 or max_level > 100:
+        if (min_level is not None and max_level is not None) and (min_level < 0 or max_level > 100):
             raise ValueError("Levels can only be between 0 and 100.")
 
         if type is None:
