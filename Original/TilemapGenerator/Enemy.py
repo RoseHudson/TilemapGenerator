@@ -14,7 +14,10 @@ class Enemy:
             dict: A dictionary containing the type and level of the enemy.
 
         Raises:
-            ValueError: If only one of min_level or max_level is provided, or min_level is greater than max_level.
+            ValueError: If only one of min_level or max_level is provided, min_level is greater 
+            than max_level, min_level or max_level are not between 1 and 100, if there are no
+            enemy types within the provided min_level and max_level, or if type is not one of
+            the valid options or None. 
         """
 
         # Define the enemy types and their default level ranges
@@ -37,6 +40,10 @@ class Enemy:
         # Ensure min_level is not greater than max_level
         if (min_level is not None and max_level is not None) and (min_level > max_level):
             raise ValueError("min_level argument must be smaller than or equal to max_level argument.")
+        
+        # Ensure min_level and max_level are in range
+        if min_level < 0 or max_level > 100:
+            raise ValueError("Levels can only be between 0 and 100.")
 
         if type is None:
             # Behavior if no arguments are given
@@ -86,16 +93,4 @@ class Enemy:
         self.row = row
         self.col = col
 
-        
-# sor = create_enemy("sorcerer", 10, 30)
-# print(create_enemy(None, 20, 50))
-# print(create_enemy("sorcerer"))
-# print(create_enemy())
-
-# print(enemy_loc(sor, 1, 2))
-
-sor = Enemy("sorcerer", 10, 30)
-print(repr(sor))
-sor.enemy_loc(1, 2)
-print(sor.type)
 
